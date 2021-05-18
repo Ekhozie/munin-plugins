@@ -2,27 +2,6 @@
 
 Custom munin plugins
 
-## Installation / configuration
-
-Install plugins in folder `/usr/local/munin/lib/plugins/`. Link them in `/etc/munin/plugins/`:
-
-```sh
-ln -s /usr/local/munin/lib/plugins/plex /etc/munin/plugins/plex
-ln -s /usr/local/munin/lib/plugins/traffic_* /etc/munin/plugins/.
-```
-
-Install configuration files in `/etc/munin/plugin-conf.d/`, and update the configuration accordingly.
-
-## Testing
-
-Test the plugin with `munin-run`
-
-```sh
-munin-run plex
-munin-run traffic_incoming
-munin-run traffic_outgoing
-```
-
 ## Available plugins
 
 ### Plex
@@ -62,4 +41,25 @@ For instance:
 [...]
 
 COMMIT
+```
+
+## Installation / configuration
+
+Install plugins in folder `/usr/local/munin/lib/plugins/`. Link them in `/etc/munin/plugins/`:
+
+```sh
+ln -s /usr/local/munin/lib/plugins/plex /etc/munin/plugins/plex
+ln -s /usr/local/munin/lib/plugins/traffic_* /etc/munin/plugins/.
+```
+
+Install configuration files in `/etc/munin/plugin-conf.d/`, and update the configuration accordingly.
+
+## Testing
+
+Test the plugin with `munin-run`
+
+```sh
+munin-run plex
+munin-run traffic_incoming
+munin-run traffic_outgoing
 ```
