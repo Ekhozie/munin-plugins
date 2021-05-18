@@ -11,6 +11,8 @@ Use https by default.
 
 ![plex](./docs/images/plex.png)
 
+Thanks to [MorbZ](https://gist.github.com/MorbZ) for the initial idea <https://gist.github.com/MorbZ/e5d05856a6bdbcf4ca52c4cae21f2228>.
+
 ### Traffic
 
 Show iptables traffic by port.  
