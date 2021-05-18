@@ -30,9 +30,15 @@ munin-run traffic_outgoing
 Show number of playing / transcoding steams.  
 Use https by default.
 
+![plex](./docs/images/plex.png)
+
 ### Traffic
 
 Show iptables traffic by port.  
+
+![traffic_incoming](./docs/images/traffic_incoming.png)
+![traffic_outgoing](./docs/images/traffic_outgoing.png)
+
 You need to create iptable rules with comment, so the plugin can get the required data. Syntax for the comment is `traffic_<incoming|outgoing>:<port>` like this `traffic_incoming:80`.  
 For instance:
 
