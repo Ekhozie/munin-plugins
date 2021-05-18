@@ -18,7 +18,7 @@ Show iptables traffic by port.
 ![traffic_incoming](./docs/images/traffic_incoming.png)
 ![traffic_outgoing](./docs/images/traffic_outgoing.png)
 
-You need to create iptable rules with comment, so the plugin can get the required data. Syntax for the comment is `traffic_<incoming|outgoing>:<port>` like this `traffic_incoming:80`.  
+You need to create iptable rules with comment, so the plugin can get the required data. Syntax for the comment is `traffic_<incoming|outgoing>:<port>` like this: `traffic_incoming:80`.  
 For instance:
 
 ```iptables
@@ -56,7 +56,7 @@ Install configuration files in `/etc/munin/plugin-conf.d/`, and update the confi
 
 ## Testing
 
-Test the plugin with `munin-run`
+Test plugins with `munin-run`
 
 ```sh
 munin-run plex
