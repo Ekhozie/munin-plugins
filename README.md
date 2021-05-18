@@ -13,7 +13,7 @@ Thanks to [MorbZ](https://gist.github.com/MorbZ) for the initial idea <https://g
 
 ### Traffic
 
-Show iptables traffic by port.  
+Show iptables traffic by port.
 
 ![traffic_incoming](./docs/images/traffic_incoming.png)
 ![traffic_outgoing](./docs/images/traffic_outgoing.png)
@@ -53,6 +53,12 @@ ln -s /usr/local/munin/lib/plugins/traffic_* /etc/munin/plugins/.
 ```
 
 Install configuration files in `/etc/munin/plugin-conf.d/`, and update the configuration accordingly.
+
+Finally restart munin-node:
+
+```sh
+systemctl restart munin-node
+```
 
 ## Testing
 
