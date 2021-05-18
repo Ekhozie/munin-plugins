@@ -1,7 +1,5 @@
 # munin-plugins
 
-Custom munin plugins
-
 ## Available plugins
 
 ### Plex
