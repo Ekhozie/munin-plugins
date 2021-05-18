@@ -1,0 +1,8 @@
+[traffic_*]
+user root
+
+[traffic_incoming]
+env.ports 22 80 443
+
+[traffic_outgoing]
+env.ports 22 80 443

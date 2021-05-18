@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+# If the server needs authentication add file /etc/munin/plugin-conf.d/plex:
+#   [plex]
+#   env.plex_token yourplextoken
+#   env.plex_host yourplexhost
+
+import urllib2, ssl, sys, os
+import xml.etree.ElementTree as ET
+
+# Get host
+host = os.getenv('plex_host', 'localhost')
+
+# Show Config
+if len(sys.argv) > 1 and sys.argv[1] == 'config':
+    print 'host_name ' + host
+    print 'graph_title Plex Streams'
+    print 'graph_vlabel Number of streams'
+    print 'graph_category plex'
+    print 'graph_scale no'
+    print 'playing.label Playing'
+    print 'playing.draw AREASTACK'
+    print 'transcoding.label Transcoding'
+    print 'transcoding.draw LINE2'
+    sys.exit(0)
+
+# Show values
+# Make URL
+url = 'https://' + host + ':32400/status/sessions/'
+token = os.getenv('plex_token')
+if token is not None:
+    url += '?X-Plex-Token=' + token
+
+# Get playing streams
+file = urllib2.urlopen(url, context=ssl._create_unverified_context())
+root = ET.ElementTree(file=file).getroot()
+playingNum = 0
+for video in root.iter('Video'):
+    for player in video.iter('Player'):
+        if player.get('state') == 'playing':
+            playingNum += 1
+print 'playing.value', playingNum
+
+# Get transcoding sessions
+procs = os.popen('pgrep -l "Plex Transcoder"').read()
+lines = len(procs.split('\n')) - 1
+print 'transcoding.value', lines

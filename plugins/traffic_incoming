@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+
+if [ -z ${ports+x} ]; then
+    PORTS="80 443"
+else
+    PORTS="${ports}"
+fi
+
+if [ "$1" = "autoconf" ]; then
+    echo "yes"
+    exit 0
+fi
+
+# If run with the "config"-parameter, give out information on how the
+# graphs should look.
+
+if [ "$1" = "config" ]; then
+    echo "graph_title Traffic incoming"
+    # Arguments to "rrdtool graph". In this case, tell it that the lower limit of the graph is '0'
+    # and that 1k=1000 (not 1024)
+    echo "graph_args --base 1000 -l 0"
+    # The Y-axis label
+    echo "graph_vlabel Bytes per second"
+    # Graph category. Defaults to 'other'
+    echo "graph_category network"
+    # The fields. "label" is used in the legend, "label" is the only required subfield
+    for port in $PORTS
+    do
+
+    echo "p_$port.draw AREASTACK"
+    echo "p_$port.label Port $port"
+    echo "p_$port.type DERIVE"
+    echo "p_$port.min 0"
+    echo "p_$port.cdef p_$port,8,*"
+
+    done
+    # Last, if run with the "config"-parameter, quit here (don't display any data)
+    exit 0
+fi
+
+for port in $PORTS
+do
+echo "p_$port.value `iptables -vxnL INPUT|grep "traffic_incoming:$port"|tail -1|awk '{print $2}'`"
+done
+
+exit 0
